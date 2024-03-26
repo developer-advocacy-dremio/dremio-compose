@@ -6,7 +6,7 @@ services:
     image: projectnessie/nessie:latest
     container_name: nessie
     networks:
-      dremio-pg-superset:
+      dremio-spark:
     ports:
       - 19120:19120
   # Minio Storage Server
@@ -20,7 +20,7 @@ services:
       - MINIO_REGION_NAME=us-east-1
       - MINIO_REGION=us-east-1
     networks:
-      dremio-pg-superset:
+      dremio-spark:
     ports:
       - 9001:9001
       - 9000:9000
@@ -35,26 +35,17 @@ services:
       - 32010:32010
     container_name: dremio
     networks:
-      dremio-pg-superset:
-  # Postgres
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-    ports:
-      - "5432:5432"
+      dremio-spark:
+  # Spark
+  spark:
+    platform: linux/x86_64
+    image: alexmerced/spark35notebook:latest
+    ports: 
+      - 8080:8080  # Master Web UI
+      - 7077:7077  # Master Port
+      - 8888:8888  # Notebook
+    container_name: spark
     networks:
-      dremio-pg-superset:
-  #Superset
-  superset:
-    image: alexmerced/dremio-superset
-    container_name: superset
-    networks:
-      dremio-pg-superset:
-    ports:
-      - 8080:8088
+      dremio-spark:
 networks:
-  dremio-pg-superset:
+  dremio-spark:

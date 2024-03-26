@@ -2,17 +2,17 @@ version: "3"
 
 services:
   # Nessie Catalog Server Using In-Memory Store
-  nessie:
+  catalog:
     image: projectnessie/nessie:latest
-    container_name: nessie
+    container_name: catalog
     networks:
-      dremio-pg-superset:
+      dremio-laptop-lakehouse:
     ports:
       - 19120:19120
   # Minio Storage Server
-  minio:
+  storage:
     image: minio/minio:latest
-    container_name: minio
+    container_name: storage
     environment:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=password
@@ -20,7 +20,7 @@ services:
       - MINIO_REGION_NAME=us-east-1
       - MINIO_REGION=us-east-1
     networks:
-      dremio-pg-superset:
+      dremio-laptop-lakehouse:
     ports:
       - 9001:9001
       - 9000:9000
@@ -35,26 +35,14 @@ services:
       - 32010:32010
     container_name: dremio
     networks:
-      dremio-pg-superset:
-  # Postgres
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      dremio-laptop-lakehouse:
+  #Puppygraph
+  puppygraph:
+    image: puppygraph/puppygraph:stable
+    container_name: puppygraph
     ports:
-      - "5432:5432"
-    networks:
-      dremio-pg-superset:
-  #Superset
-  superset:
-    image: alexmerced/dremio-superset
-    container_name: superset
-    networks:
-      dremio-pg-superset:
-    ports:
-      - 8080:8088
+      - "8081:8081"
+      - "8182:8182"
+      - "7687:7687"
 networks:
-  dremio-pg-superset:
+  dremio-laptop-lakehouse:
