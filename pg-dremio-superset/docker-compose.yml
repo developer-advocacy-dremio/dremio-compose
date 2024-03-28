@@ -45,7 +45,7 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
     ports:
-      - "5432:5432"
+      - "5435:5432"
     networks:
       dremio-pg-superset:
   #Superset
