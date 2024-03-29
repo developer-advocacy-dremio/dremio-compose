@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  # Dremio
+  dremio:
+    platform: linux/x86_64
+    image: dremio/dremio-oss:latest
+    ports:
+      - 9047:9047
+      - 31010:31010
+      - 32010:32010
+    container_name: dremio
+    networks:
+      dremio-superset:
+  #Superset
+  superset:
+    image: alexmerced/dremio-superset
+    container_name: superset
+    networks:
+      dremio-superset:
+    ports:
+      - 8080:8088
+networks:
+  dremio-superset:
