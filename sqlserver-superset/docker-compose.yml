@@ -6,7 +6,7 @@ services:
     image: projectnessie/nessie:latest
     container_name: nessie
     networks:
-      mongodb-dremio-superset:
+      sqlserver-dremio-superset:
     ports:
       - 19120:19120
   # Minio Storage Server
@@ -20,7 +20,7 @@ services:
       - MINIO_REGION_NAME=us-east-1
       - MINIO_REGION=us-east-1
     networks:
-      mongodb-dremio-superset:
+      sqlserver-dremio-superset:
     ports:
       - 9001:9001
       - 9000:9000
@@ -35,25 +35,25 @@ services:
       - 32010:32010
     container_name: dremio
     networks:
-      mongodb-dremio-superset:
-  #MongoDB
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
+      sqlserver-dremio-superset:
+  #SQLServer
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      SA_PASSWORD: "Yourpassword2024"
+      ACCEPT_EULA: "Y"
     ports:
-      - "27017:27017"
+      - "1433:1433"
     networks:
-      mongodb-dremio-superset:
+      sqlserver-dremio-superset:
   #Superset
   superset:
     image: alexmerced/dremio-superset
     container_name: superset
     networks:
-      mongodb-dremio-superset:
+      sqlserver-dremio-superset:
     ports:
       - 8080:8088
 networks:
-  mongodb-dremio-superset:
+  sqlserver-dremio-superset:
