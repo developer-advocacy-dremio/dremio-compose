@@ -44,6 +44,10 @@ services:
       - 8080:8080  # Master Web UI
       - 7077:7077  # Master Port
       - 8888:8888  # Notebook
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=admin #minio username
+      - AWS_SECRET_ACCESS_KEY=password #minio password
     container_name: spark
     networks:
       de-end-to-end:
@@ -66,6 +70,6 @@ services:
     networks:
       de-end-to-end:
     ports:
-      - 8080:8088
+      - 8088:8088
 networks:
   de-end-to-end:
