@@ -37,6 +37,7 @@ services:
     networks:
       dremio-spark:
   # Spark
+  # Spark
   spark:
     platform: linux/x86_64
     image: alexmerced/spark35notebook:latest
@@ -44,6 +45,10 @@ services:
       - 8080:8080  # Master Web UI
       - 7077:7077  # Master Port
       - 8888:8888  # Notebook
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=admin #minio username
+      - AWS_SECRET_ACCESS_KEY=password #minio password
     container_name: spark
     networks:
       dremio-spark:
