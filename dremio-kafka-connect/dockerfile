@@ -1,0 +1,21 @@
+# Use the base Kafka Connect image
+FROM confluentinc/cp-kafka-connect:latest
+
+# Set the working directory
+WORKDIR /usr/share/java
+
+# Download and install the Apache Iceberg Kafka Connect Sink
+# This step assumes you have the connector jar available at a certain URL or locally.
+COPY ./iceberg-kafka-connect-runtime-0.6.16 /usr/share/java/kafka-connect-iceberg/
+
+# (Optional) Add your Kafka Connect configuration files
+# COPY ./iceberg-connector-config.json /etc/kafka-connect/config/
+
+# Set up the environment variables or any additional setup steps
+ENV CONNECT_PLUGIN_PATH="/usr/share/java/kafka-connect-iceberg,/usr/share/java/kafka-connect-jdbc"
+
+# Expose the necessary port numbers
+EXPOSE 8083
+
+# Run the Kafka Connect worker
+CMD ["connect-standalone.sh", "/etc/kafka-connect/kafka-connect.properties", "/etc/kafka-connect/my-connector-config.properties"]

@@ -1,0 +1,29 @@
+{
+    "name": "iceberg-sink-connector",
+    "config": {
+      "connector.class": "org.apache.iceberg.kafka.connect.IcebergSinkConnector",
+      "tasks.max": "1",
+      "topics": "your_topic_name",
+      "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "true",
+  
+      "iceberg.table.name": "your_namespace.your_table_name",
+      "nessie.url": "http://nessie:19120/api/v1",
+      "nessie.ref": "main",
+      "nessie.auth.type": "NONE",
+      
+
+      "nessie.owner": "kafka_connect_user",
+      "nessie.repo": "kafka_connect_repo",
+  
+
+      "iceberg.write.format.default": "parquet",
+      "iceberg.catalog.type": "nessie",
+  
+
+      "errors.tolerance": "all",
+      "errors.log.enable": "true",
+      "errors.log.include.messages": "true"
+    }
+  }
