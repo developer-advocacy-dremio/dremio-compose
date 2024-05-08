@@ -92,7 +92,7 @@ services:
       - nessie
     networks:
       - dremio-kafka-connect
-    # Minio Storage Server
+  # Minio Storage Server
   minio:
     image: minio/minio:latest
     container_name: minio
