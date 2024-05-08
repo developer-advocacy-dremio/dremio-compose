@@ -1,29 +1,19 @@
 {
-    "name": "iceberg-sink-connector",
-    "config": {
-      "connector.class": "org.apache.iceberg.kafka.connect.IcebergSinkConnector",
-      "tasks.max": "1",
-      "topics": "your_topic_name",
-      "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-      "value.converter.schemas.enable": "true",
-  
-      "iceberg.table.name": "your_namespace.your_table_name",
-      "nessie.url": "http://nessie:19120/api/v1",
-      "nessie.ref": "main",
-      "nessie.auth.type": "NONE",
-      
+  "name": "iceberg-sink-connector",
+  "config": {
+    "connector.class": "io.tabular.iceberg.connect.IcebergSinkConnector",
+    "tasks.max": "2",
+    "topics": "events",
+    "iceberg.tables": "stream.sales",
 
-      "nessie.owner": "kafka_connect_user",
-      "nessie.repo": "kafka_connect_repo",
-  
-
-      "iceberg.write.format.default": "parquet",
-      "iceberg.catalog.type": "nessie",
-  
-
-      "errors.tolerance": "all",
-      "errors.log.enable": "true",
-      "errors.log.include.messages": "true"
-    }
+    "iceberg.catalog.catalog-impl": "org.apache.iceberg.nessie.NessieCatalog",
+    "iceberg.catalog.uri": "http://nessie:19120/api/v1",
+    "iceberg.catalog.ref": "main",
+    "iceberg.catalog.warehouse": "s3a://warehouse",
+    "iceberg.catalog.s3.endpoint": "http://minio/9000",
+    "iceberg.catalog.io-impl": "org.apache.iceberg.aws.s3.S3FileIO",
+    "iceberg.catalog.client.region": "us-east-1",
+    "iceberg.catalog.s3.access-key-id": "admin",
+    "iceberg.catalog.s3.secret-access-key": "password"
   }
+}

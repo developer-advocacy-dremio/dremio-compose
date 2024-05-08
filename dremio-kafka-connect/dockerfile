@@ -9,7 +9,8 @@ WORKDIR /usr/share/java
 COPY ./iceberg-kafka-connect-runtime-0.6.16 /usr/share/java/kafka-connect-iceberg/
 
 # (Optional) Add your Kafka Connect configuration files
-# COPY ./iceberg-connector-config.json /etc/kafka-connect/config/
+COPY ./iceberg-connector-config.json /etc/kafka-connect/config/
+COPY ./iceberg-connector-config.properties /etc/kafka-connect/config/
 
 # Set up the environment variables or any additional setup steps
 ENV CONNECT_PLUGIN_PATH="/usr/share/java/kafka-connect-iceberg,/usr/share/java/kafka-connect-jdbc"
@@ -18,4 +19,4 @@ ENV CONNECT_PLUGIN_PATH="/usr/share/java/kafka-connect-iceberg,/usr/share/java/k
 EXPOSE 8083
 
 # Run the Kafka Connect worker
-CMD ["connect-standalone.sh", "/etc/kafka-connect/kafka-connect.properties", "/etc/kafka-connect/my-connector-config.properties"]
+CMD ["connect-standalone.sh", "/etc/kafka-connect/kafka-connect.properties", "/etc/kafka-connect/iceberg-connector-config.properties"]
