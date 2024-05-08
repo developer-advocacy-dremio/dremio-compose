@@ -8,8 +8,8 @@ Make sure the `iceberg-connector-config.properties` file has the right propertie
 name=iceberg-sink-connector
 connector.class=io.tabular.iceberg.connect.IcebergSinkConnector
 tasks.max=2
-topics=events
-iceberg.tables=stream.sales
+topics=sales
+iceberg.tables=streaming.sales
 errors.tolerance=all
 errors.log.enable=true
 errors.log.include.messages=true
@@ -53,3 +53,17 @@ Set the authentication to “none”
     - `fs.s3a.endpoint` to `minio:9000`
     - `dremio.s3.compat` to `true`
 - Uncheck “encrypt connection” (since our local Nessie instance is running on http)
+
+Once the nessie has been added as a source in Dremio.
+
+- create a folder called `streaming` in your nessie source
+- run the following sql to create your destination table 
+
+```sql
+CREATE TABLE nessie.streaming.sales (
+    id VARCHAR,
+    type VARCHAR,
+    ts TIMESTAMP,
+    payload VARCHAR)
+PARTITION BY (hour(ts));
+```
