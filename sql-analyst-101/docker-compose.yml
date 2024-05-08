@@ -1,0 +1,70 @@
+version: "3"
+
+services:
+  # Nessie Catalog Server Using In-Memory Store
+  catalog:
+    image: projectnessie/nessie:latest
+    container_name: catalog
+    networks:
+      sql-analyst-101:
+    ports:
+      - 19120:19120
+
+  # Minio Storage Server
+  storage:
+    image: minio/minio:latest
+    container_name: storage
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_DOMAIN=storage
+      - MINIO_REGION_NAME=us-east-1
+      - MINIO_REGION=us-east-1
+    networks:
+      sql-analyst-101:
+    ports:
+      - 9001:9001
+      - 9000:9000
+    command: ["server", "/data", "--console-address", ":9001"]
+
+  # Minio Setup for creating buckets
+  minio-setup:
+    image: minio/mc:latest
+    depends_on:
+      - storage
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+    volumes:
+      - ./sampledata:/tmp/data # Adjust this path to where your data files are stored
+    entrypoint: >
+      /bin/sh -c "
+      echo 'Waiting for MinIO to start...' &&
+      /bin/sleep 10 &&
+      mc alias set minio http://storage:9000 $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD &&
+      mc mb minio/warehouse &&
+      mc mb minio/datalakehouse &&
+      mc mb minio/sampledata &&
+      mc cp /tmp/data/* minio/sampledata/ &&
+      echo 'Buckets created and data loaded.'"
+    networks:
+      sql-analyst-101:
+
+  # Dremio
+  dremio:
+    image: dremio/dremio-oss
+    container_name: dremio
+    ports:
+      - 9047:9047
+      - 31010:31010
+      - 32010:32010
+      - 45678:45678
+    environment:
+      - DREMIO_JAVA_SERVER_EXTRA_OPTS=-Dpaths.dist=file:///opt/dremio/data/dist
+    depends_on:
+      - minio-setup
+    networks:
+      sql-analyst-101:
+
+networks:
+  sql-analyst-101:
