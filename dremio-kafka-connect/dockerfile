@@ -13,6 +13,9 @@ COPY ./iceberg-connector-config.json /etc/kafka-connect/config/
 COPY ./iceberg-connector-config.properties /etc/kafka-connect/config/
 COPY ./kafka-connect.properties /etc/kafka-connect/config/
 
+# Uncomment if you need more granular logging for troubleshoot
+#COPY ./connect-log4j.properties /etc/kafka/
+
 # Set up the environment variables or any additional setup steps
 ENV CONNECT_PLUGIN_PATH="/usr/share/java/kafka-connect-iceberg,/usr/share/java/kafka-connect-jdbc"
 

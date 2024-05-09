@@ -68,6 +68,10 @@ schemas.enable=false
 
 ## Step 2 - Create Destination Table
 
+```
+docker compose up - dremio minio minio-setup nessie
+```
+
 Head to Localhost:9047 to create a nessie connection in dremio.
 
 ## Connecting the Nessie Catalog To Dremio
@@ -109,12 +113,12 @@ CREATE TABLE nessie.streaming.sales (
 PARTITION BY (hour(ts));
 ```
 
-## Get Kafka-Connect Going
+## Get Kafka Going and Populate Topic
 
 Run Kafka-Connect
 
 ```shell
-docker compose up zookeeper kafka kafka-connect kafka-rest-proxy
+docker compose up zookeeper kafka kafka-rest-proxy
 ```
 
 Once these containers have started just populate the "sales" topic as stated in our connector configurations. There are two ways you can do this:
@@ -126,10 +130,31 @@ curl -X POST -H "Content-Type: application/vnd.kafka.json.v2+json" \
      -H "Accept: application/vnd.kafka.v2+json" \
      --data '{
        "records": [
-         {"value": {"id": 14, "product_name": "Smartphone", "quantity": 5, "price": 299.99}},
-         {"value": {"id": 15, "product_name": "Tablet", "quantity": 2, "price": 450.00}},
-         {"value": {"id": 16, "product_name": "Charging Cable", "quantity": 10, "price": 19.95}}
-       ]
+  {
+    "id": "001",
+    "type": "Transaction",
+    "ts": "2024-05-09T12:00:00Z",
+    "payload": "{\"amount\": 150, \"currency\": \"USD\", \"status\": \"completed\"}"
+  },
+  {
+    "id": "002",
+    "type": "Transaction",
+    "ts": "2024-05-09T12:15:00Z",
+    "payload": "{\"amount\": 200, \"currency\": \"USD\", \"status\": \"completed\"}"
+  },
+  {
+    "id": "003",
+    "type": "Refund",
+    "ts": "2024-05-09T13:00:00Z",
+    "payload": "{\"amount\": 50, \"currency\": \"USD\", \"status\": \"processed\"}"
+  },
+  {
+    "id": "004",
+    "type": "Transaction",
+    "ts": "2024-05-09T13:45:00Z",
+    "payload": "{\"amount\": 300, \"currency\": \"USD\", \"status\": \"completed\"}"
+  }
+]
      }' \
      http://localhost:8082/topics/sales
 ```
@@ -148,9 +173,30 @@ kafka-console-producer --broker-list localhost:9092 --topic sales
 
 - Begin entering JSON records and hit enter after each one to submit them
 ```json
-{"id": 101, "product_name": "Laptop", "quantity": 2, "price": 999.99}
-{"id": 102, "product_name": "Smartphone", "quantity": 5, "price": 299.99}
-{"id": 103, "product_name": "Keyboard", "quantity": 10, "price": 49.99}
+{
+    "id": "001",
+    "type": "Transaction",
+    "ts": "2024-05-09T12:00:00Z",
+    "payload": "{\"amount\": 150, \"currency\": \"USD\", \"status\": \"completed\"}"
+}
+{
+    "id": "002",
+    "type": "Transaction",
+    "ts": "2024-05-09T12:15:00Z",
+    "payload": "{\"amount\": 200, \"currency\": \"USD\", \"status\": \"completed\"}"
+}
+{
+    "id": "003",
+    "type": "Refund",
+    "ts": "2024-05-09T13:00:00Z",
+    "payload": "{\"amount\": 50, \"currency\": \"USD\", \"status\": \"processed\"}"
+}
+{
+    "id": "004",
+    "type": "Transaction",
+    "ts": "2024-05-09T13:45:00Z",
+    "payload": "{\"amount\": 300, \"currency\": \"USD\", \"status\": \"completed\"}"
+}
 ```
 
 Use `ctrl+c` to exit the console producer
@@ -158,5 +204,11 @@ Use `ctrl+c` to exit the console producer
 - To confirm you added the records use the console consumer to bring them up
 
 ```shell
-kafka-console-consumer --bootstrap-server localhost:9092 --topic sales --from-beginning
+kafka-console-consumer --bootstrap-server localhost:29092 --topic sales --from-beginning
+```
+
+## Step 3 - Startup Kafka Connect
+
+```
+docker compose up kafka-connect
 ```
