@@ -8,13 +8,17 @@ WORKDIR /usr/share/java
 # This step assumes you have the connector jar available at a certain URL or locally.
 COPY ./iceberg-kafka-connect-runtime-0.6.16 /usr/share/java/kafka-connect-iceberg/
 
+# For breaking the cache at build time
+RUN echo "hello new york"
+
 # (Optional) Add your Kafka Connect configuration files
+
+COPY ./kafka-connect.properties /etc/kafka-connect/config/
 COPY ./iceberg-connector-config.json /etc/kafka-connect/config/
 COPY ./iceberg-connector-config.properties /etc/kafka-connect/config/
-COPY ./kafka-connect.properties /etc/kafka-connect/config/
 
-# Uncomment if you need more granular logging for troubleshoot
-#COPY ./connect-log4j.properties /etc/kafka/
+# granular logging for troubleshoot
+COPY ./connect-log4j.properties /etc/kafka/
 
 # Set up the environment variables or any additional setup steps
 ENV CONNECT_PLUGIN_PATH="/usr/share/java/kafka-connect-iceberg,/usr/share/java/kafka-connect-jdbc"
