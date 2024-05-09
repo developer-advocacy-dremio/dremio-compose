@@ -9,7 +9,7 @@ WORKDIR /usr/share/java
 COPY ./iceberg-kafka-connect-runtime-0.6.16 /usr/share/java/kafka-connect-iceberg/
 
 # For breaking the cache at build time
-RUN echo "hello new mexico"
+RUN echo "hello at"
 
 # (Optional) Add your Kafka Connect configuration files
 
