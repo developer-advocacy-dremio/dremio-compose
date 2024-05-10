@@ -1,0 +1,904 @@
+{
+    "records": [
+        {
+            "value": {
+                "id": 1,
+                "table": "credit_memo",
+                "invoice_num": 623,
+                "date": "2024-06-16",
+                "amount": 235.67
+            }
+        },
+        {
+            "value": {
+                "id": 2,
+                "table": "bill",
+                "invoice_num": 444,
+                "date": "2024-09-03",
+                "amount": 946.67
+            }
+        },
+        {
+            "value": {
+                "id": 3,
+                "table": "bill_payment",
+                "invoice_num": 299,
+                "date": "2024-03-15",
+                "amount": 354.77
+            }
+        },
+        {
+            "value": {
+                "id": 4,
+                "table": "invoice",
+                "invoice_num": 249,
+                "date": "2024-06-15",
+                "amount": 479.09
+            }
+        },
+        {
+            "value": {
+                "id": 5,
+                "table": "bill_payment",
+                "invoice_num": 705,
+                "date": "2024-12-15",
+                "amount": 239.25
+            }
+        },
+        {
+            "value": {
+                "id": 6,
+                "table": "bill_payment",
+                "invoice_num": 242,
+                "date": "2024-05-08",
+                "amount": 171.19
+            }
+        },
+        {
+            "value": {
+                "id": 7,
+                "table": "invoice",
+                "invoice_num": 826,
+                "date": "2024-05-11",
+                "amount": 360.24
+            }
+        },
+        {
+            "value": {
+                "id": 8,
+                "table": "payment",
+                "invoice_num": 333,
+                "date": "2024-08-03",
+                "amount": 132.92
+            }
+        },
+        {
+            "value": {
+                "id": 9,
+                "table": "invoice",
+                "invoice_num": 60,
+                "date": "2024-10-25",
+                "amount": 479.04
+            }
+        },
+        {
+            "value": {
+                "id": 10,
+                "table": "bill_payment",
+                "invoice_num": 978,
+                "date": "2024-08-01",
+                "amount": 822.75
+            }
+        },
+        {
+            "value": {
+                "id": 11,
+                "table": "bill",
+                "invoice_num": 32,
+                "date": "2024-08-24",
+                "amount": 500.69
+            }
+        },
+        {
+            "value": {
+                "id": 12,
+                "table": "invoice",
+                "invoice_num": 681,
+                "date": "2024-02-11",
+                "amount": 526.8
+            }
+        },
+        {
+            "value": {
+                "id": 13,
+                "table": "bill_payment",
+                "invoice_num": 653,
+                "date": "2024-07-10",
+                "amount": 429.51
+            }
+        },
+        {
+            "value": {
+                "id": 14,
+                "table": "payment",
+                "invoice_num": 973,
+                "date": "2024-11-27",
+                "amount": 339.76
+            }
+        },
+        {
+            "value": {
+                "id": 15,
+                "table": "bill",
+                "invoice_num": 8,
+                "date": "2024-10-01",
+                "amount": 704.22
+            }
+        },
+        {
+            "value": {
+                "id": 16,
+                "table": "bill",
+                "invoice_num": 933,
+                "date": "2024-04-08",
+                "amount": 280.46
+            }
+        },
+        {
+            "value": {
+                "id": 17,
+                "table": "invoice",
+                "invoice_num": 991,
+                "date": "2024-06-26",
+                "amount": 389.37
+            }
+        },
+        {
+            "value": {
+                "id": 18,
+                "table": "bill_payment",
+                "invoice_num": 494,
+                "date": "2024-11-18",
+                "amount": 522.08
+            }
+        },
+        {
+            "value": {
+                "id": 19,
+                "table": "bill_payment",
+                "invoice_num": 630,
+                "date": "2024-03-19",
+                "amount": 324.21
+            }
+        },
+        {
+            "value": {
+                "id": 20,
+                "table": "payment",
+                "invoice_num": 19,
+                "date": "2024-06-16",
+                "amount": 928.54
+            }
+        },
+        {
+            "value": {
+                "id": 21,
+                "table": "credit_memo",
+                "invoice_num": 249,
+                "date": "2024-01-24",
+                "amount": 424.06
+            }
+        },
+        {
+            "value": {
+                "id": 22,
+                "table": "bill_payment",
+                "invoice_num": 117,
+                "date": "2024-10-24",
+                "amount": 756.32
+            }
+        },
+        {
+            "value": {
+                "id": 23,
+                "table": "bill",
+                "invoice_num": 408,
+                "date": "2024-09-25",
+                "amount": 716.08
+            }
+        },
+        {
+            "value": {
+                "id": 24,
+                "table": "bill_payment",
+                "invoice_num": 62,
+                "date": "2024-10-08",
+                "amount": 134.79
+            }
+        },
+        {
+            "value": {
+                "id": 25,
+                "table": "bill_payment",
+                "invoice_num": 283,
+                "date": "2024-07-13",
+                "amount": 201.8
+            }
+        },
+        {
+            "value": {
+                "id": 26,
+                "table": "invoice",
+                "invoice_num": 247,
+                "date": "2024-04-03",
+                "amount": 137.3
+            }
+        },
+        {
+            "value": {
+                "id": 27,
+                "table": "payment",
+                "invoice_num": 506,
+                "date": "2024-06-24",
+                "amount": 682.71
+            }
+        },
+        {
+            "value": {
+                "id": 28,
+                "table": "invoice",
+                "invoice_num": 2,
+                "date": "2024-08-08",
+                "amount": 181.73
+            }
+        },
+        {
+            "value": {
+                "id": 29,
+                "table": "credit_memo",
+                "invoice_num": 200,
+                "date": "2024-05-06",
+                "amount": 174.9
+            }
+        },
+        {
+            "value": {
+                "id": 30,
+                "table": "bill",
+                "invoice_num": 410,
+                "date": "2024-07-06",
+                "amount": 136.84
+            }
+        },
+        {
+            "value": {
+                "id": 31,
+                "table": "bill_payment",
+                "invoice_num": 308,
+                "date": "2024-08-17",
+                "amount": 825.34
+            }
+        },
+        {
+            "value": {
+                "id": 32,
+                "table": "invoice",
+                "invoice_num": 139,
+                "date": "2024-12-15",
+                "amount": 647.24
+            }
+        },
+        {
+            "value": {
+                "id": 33,
+                "table": "bill_payment",
+                "invoice_num": 886,
+                "date": "2024-11-27",
+                "amount": 529.85
+            }
+        },
+        {
+            "value": {
+                "id": 34,
+                "table": "invoice",
+                "invoice_num": 314,
+                "date": "2024-10-03",
+                "amount": 185.27
+            }
+        },
+        {
+            "value": {
+                "id": 35,
+                "table": "payment",
+                "invoice_num": 639,
+                "date": "2024-03-05",
+                "amount": 108.16
+            }
+        },
+        {
+            "value": {
+                "id": 36,
+                "table": "bill",
+                "invoice_num": 943,
+                "date": "2024-02-02",
+                "amount": 521.78
+            }
+        },
+        {
+            "value": {
+                "id": 37,
+                "table": "bill_payment",
+                "invoice_num": 661,
+                "date": "2024-05-02",
+                "amount": 786.92
+            }
+        },
+        {
+            "value": {
+                "id": 38,
+                "table": "invoice",
+                "invoice_num": 811,
+                "date": "2024-08-03",
+                "amount": 739.98
+            }
+        },
+        {
+            "value": {
+                "id": 39,
+                "table": "bill",
+                "invoice_num": 83,
+                "date": "2024-07-02",
+                "amount": 794.18
+            }
+        },
+        {
+            "value": {
+                "id": 40,
+                "table": "invoice",
+                "invoice_num": 988,
+                "date": "2024-08-06",
+                "amount": 809.75
+            }
+        },
+        {
+            "value": {
+                "id": 41,
+                "table": "bill",
+                "invoice_num": 784,
+                "date": "2024-03-18",
+                "amount": 990.95
+            }
+        },
+        {
+            "value": {
+                "id": 42,
+                "table": "invoice",
+                "invoice_num": 966,
+                "date": "2024-09-02",
+                "amount": 650.35
+            }
+        },
+        {
+            "value": {
+                "id": 43,
+                "table": "payment",
+                "invoice_num": 666,
+                "date": "2024-07-28",
+                "amount": 874.53
+            }
+        },
+        {
+            "value": {
+                "id": 44,
+                "table": "bill_payment",
+                "invoice_num": 108,
+                "date": "2024-04-23",
+                "amount": 351.67
+            }
+        },
+        {
+            "value": {
+                "id": 45,
+                "table": "bill_payment",
+                "invoice_num": 558,
+                "date": "2024-06-10",
+                "amount": 932.58
+            }
+        },
+        {
+            "value": {
+                "id": 46,
+                "table": "invoice",
+                "invoice_num": 344,
+                "date": "2024-06-17",
+                "amount": 809.35
+            }
+        },
+        {
+            "value": {
+                "id": 47,
+                "table": "bill",
+                "invoice_num": 766,
+                "date": "2024-05-14",
+                "amount": 944.2
+            }
+        },
+        {
+            "value": {
+                "id": 48,
+                "table": "bill_payment",
+                "invoice_num": 92,
+                "date": "2024-01-02",
+                "amount": 955.92
+            }
+        },
+        {
+            "value": {
+                "id": 49,
+                "table": "credit_memo",
+                "invoice_num": 62,
+                "date": "2024-02-16",
+                "amount": 372.2
+            }
+        },
+        {
+            "value": {
+                "id": 50,
+                "table": "bill_payment",
+                "invoice_num": 344,
+                "date": "2024-04-15",
+                "amount": 543.8
+            }
+        },
+        {
+            "value": {
+                "id": 51,
+                "table": "payment",
+                "invoice_num": 731,
+                "date": "2024-03-26",
+                "amount": 253.55
+            }
+        },
+        {
+            "value": {
+                "id": 52,
+                "table": "invoice",
+                "invoice_num": 927,
+                "date": "2024-02-15",
+                "amount": 943.15
+            }
+        },
+        {
+            "value": {
+                "id": 53,
+                "table": "payment",
+                "invoice_num": 744,
+                "date": "2024-07-23",
+                "amount": 894.62
+            }
+        },
+        {
+            "value": {
+                "id": 54,
+                "table": "invoice",
+                "invoice_num": 849,
+                "date": "2024-06-15",
+                "amount": 197.27
+            }
+        },
+        {
+            "value": {
+                "id": 55,
+                "table": "payment",
+                "invoice_num": 130,
+                "date": "2024-04-10",
+                "amount": 828.14
+            }
+        },
+        {
+            "value": {
+                "id": 56,
+                "table": "payment",
+                "invoice_num": 957,
+                "date": "2024-08-18",
+                "amount": 708.06
+            }
+        },
+        {
+            "value": {
+                "id": 57,
+                "table": "bill_payment",
+                "invoice_num": 981,
+                "date": "2024-05-04",
+                "amount": 649.16
+            }
+        },
+        {
+            "value": {
+                "id": 58,
+                "table": "invoice",
+                "invoice_num": 314,
+                "date": "2024-09-08",
+                "amount": 662.55
+            }
+        },
+        {
+            "value": {
+                "id": 59,
+                "table": "invoice",
+                "invoice_num": 84,
+                "date": "2024-11-11",
+                "amount": 199.97
+            }
+        },
+        {
+            "value": {
+                "id": 60,
+                "table": "payment",
+                "invoice_num": 682,
+                "date": "2024-06-21",
+                "amount": 115.05
+            }
+        },
+        {
+            "value": {
+                "id": 61,
+                "table": "bill_payment",
+                "invoice_num": 382,
+                "date": "2024-01-08",
+                "amount": 498.43
+            }
+        },
+        {
+            "value": {
+                "id": 62,
+                "table": "payment",
+                "invoice_num": 640,
+                "date": "2024-08-02",
+                "amount": 520.27
+            }
+        },
+        {
+            "value": {
+                "id": 63,
+                "table": "payment",
+                "invoice_num": 16,
+                "date": "2024-01-15",
+                "amount": 106.77
+            }
+        },
+        {
+            "value": {
+                "id": 64,
+                "table": "bill",
+                "invoice_num": 333,
+                "date": "2024-03-03",
+                "amount": 656.04
+            }
+        },
+        {
+            "value": {
+                "id": 65,
+                "table": "credit_memo",
+                "invoice_num": 413,
+                "date": "2024-07-14",
+                "amount": 984.1
+            }
+        },
+        {
+            "value": {
+                "id": 66,
+                "table": "bill_payment",
+                "invoice_num": 393,
+                "date": "2024-11-24",
+                "amount": 165.29
+            }
+        },
+        {
+            "value": {
+                "id": 67,
+                "table": "invoice",
+                "invoice_num": 59,
+                "date": "2024-02-03",
+                "amount": 725.53
+            }
+        },
+        {
+            "value": {
+                "id": 68,
+                "table": "credit_memo",
+                "invoice_num": 668,
+                "date": "2024-08-06",
+                "amount": 269.31
+            }
+        },
+        {
+            "value": {
+                "id": 69,
+                "table": "bill_payment",
+                "invoice_num": 658,
+                "date": "2024-11-04",
+                "amount": 308.36
+            }
+        },
+        {
+            "value": {
+                "id": 70,
+                "table": "credit_memo",
+                "invoice_num": 405,
+                "date": "2024-09-08",
+                "amount": 192.17
+            }
+        },
+        {
+            "value": {
+                "id": 71,
+                "table": "credit_memo",
+                "invoice_num": 395,
+                "date": "2024-06-22",
+                "amount": 699.04
+            }
+        },
+        {
+            "value": {
+                "id": 72,
+                "table": "invoice",
+                "invoice_num": 473,
+                "date": "2024-09-13",
+                "amount": 921.03
+            }
+        },
+        {
+            "value": {
+                "id": 73,
+                "table": "payment",
+                "invoice_num": 348,
+                "date": "2024-04-18",
+                "amount": 445.31
+            }
+        },
+        {
+            "value": {
+                "id": 74,
+                "table": "bill",
+                "invoice_num": 144,
+                "date": "2024-11-16",
+                "amount": 974.08
+            }
+        },
+        {
+            "value": {
+                "id": 75,
+                "table": "payment",
+                "invoice_num": 111,
+                "date": "2024-07-16",
+                "amount": 586.74
+            }
+        },
+        {
+            "value": {
+                "id": 76,
+                "table": "bill_payment",
+                "invoice_num": 383,
+                "date": "2024-07-14",
+                "amount": 201.83
+            }
+        },
+        {
+            "value": {
+                "id": 77,
+                "table": "payment",
+                "invoice_num": 912,
+                "date": "2024-03-15",
+                "amount": 528.03
+            }
+        },
+        {
+            "value": {
+                "id": 78,
+                "table": "payment",
+                "invoice_num": 261,
+                "date": "2024-12-27",
+                "amount": 349.32
+            }
+        },
+        {
+            "value": {
+                "id": 79,
+                "table": "bill_payment",
+                "invoice_num": 59,
+                "date": "2024-10-01",
+                "amount": 918.88
+            }
+        },
+        {
+            "value": {
+                "id": 80,
+                "table": "payment",
+                "invoice_num": 767,
+                "date": "2024-09-25",
+                "amount": 434.54
+            }
+        },
+        {
+            "value": {
+                "id": 81,
+                "table": "bill",
+                "invoice_num": 970,
+                "date": "2024-12-25",
+                "amount": 278.53
+            }
+        },
+        {
+            "value": {
+                "id": 82,
+                "table": "bill",
+                "invoice_num": 953,
+                "date": "2024-07-21",
+                "amount": 428.83
+            }
+        },
+        {
+            "value": {
+                "id": 83,
+                "table": "credit_memo",
+                "invoice_num": 211,
+                "date": "2024-01-14",
+                "amount": 897.42
+            }
+        },
+        {
+            "value": {
+                "id": 84,
+                "table": "bill",
+                "invoice_num": 490,
+                "date": "2024-03-04",
+                "amount": 882.01
+            }
+        },
+        {
+            "value": {
+                "id": 85,
+                "table": "payment",
+                "invoice_num": 942,
+                "date": "2024-10-26",
+                "amount": 651.76
+            }
+        },
+        {
+            "value": {
+                "id": 86,
+                "table": "bill_payment",
+                "invoice_num": 917,
+                "date": "2024-01-06",
+                "amount": 132.63
+            }
+        },
+        {
+            "value": {
+                "id": 87,
+                "table": "invoice",
+                "invoice_num": 545,
+                "date": "2024-05-20",
+                "amount": 779.33
+            }
+        },
+        {
+            "value": {
+                "id": 88,
+                "table": "payment",
+                "invoice_num": 528,
+                "date": "2024-07-06",
+                "amount": 561.69
+            }
+        },
+        {
+            "value": {
+                "id": 89,
+                "table": "bill_payment",
+                "invoice_num": 116,
+                "date": "2024-05-05",
+                "amount": 959.18
+            }
+        },
+        {
+            "value": {
+                "id": 90,
+                "table": "bill",
+                "invoice_num": 59,
+                "date": "2024-12-06",
+                "amount": 736.76
+            }
+        },
+        {
+            "value": {
+                "id": 91,
+                "table": "credit_memo",
+                "invoice_num": 811,
+                "date": "2024-10-04",
+                "amount": 507.86
+            }
+        },
+        {
+            "value": {
+                "id": 92,
+                "table": "payment",
+                "invoice_num": 342,
+                "date": "2024-05-22",
+                "amount": 531.61
+            }
+        },
+        {
+            "value": {
+                "id": 93,
+                "table": "credit_memo",
+                "invoice_num": 534,
+                "date": "2024-11-27",
+                "amount": 248.24
+            }
+        },
+        {
+            "value": {
+                "id": 94,
+                "table": "invoice",
+                "invoice_num": 864,
+                "date": "2024-09-20",
+                "amount": 907.95
+            }
+        },
+        {
+            "value": {
+                "id": 95,
+                "table": "bill",
+                "invoice_num": 745,
+                "date": "2024-06-07",
+                "amount": 942.31
+            }
+        },
+        {
+            "value": {
+                "id": 96,
+                "table": "payment",
+                "invoice_num": 812,
+                "date": "2024-02-21",
+                "amount": 173.61
+            }
+        },
+        {
+            "value": {
+                "id": 97,
+                "table": "credit_memo",
+                "invoice_num": 272,
+                "date": "2024-07-20",
+                "amount": 164.33
+            }
+        },
+        {
+            "value": {
+                "id": 98,
+                "table": "invoice",
+                "invoice_num": 89,
+                "date": "2024-05-16",
+                "amount": 896.5
+            }
+        },
+        {
+            "value": {
+                "id": 99,
+                "table": "bill",
+                "invoice_num": 156,
+                "date": "2024-04-22",
+                "amount": 993.07
+            }
+        },
+        {
+            "value": {
+                "id": 100,
+                "table": "payment",
+                "invoice_num": 928,
+                "date": "2024-02-14",
+                "amount": 801.59
+            }
+        }
+    ]
+}
