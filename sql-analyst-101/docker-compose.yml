@@ -45,7 +45,7 @@ services:
       mc mb minio/warehouse &&
       mc mb minio/datalakehouse &&
       mc mb minio/sampledata &&
-      mc cp /tmp/data/* minio/sampledata/ &&
+      mc cp --recursive /tmp/data/* minio/sampledata/ &&
       echo 'Buckets created and data loaded.'"
     networks:
       sql-analyst-101:
