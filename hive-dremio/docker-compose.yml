@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  hadoop:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: hadoop
+    environment:
+      - CLUSTER_NAME=single-node-cluster
+      - CORE_CONF_fs_defaultFS=hdfs://localhost:9000
+      - CORE_CONF_hadoop_http_staticuser_user=root
+      - HDFS_CONF_dfs_replication=1
+      - HDFS_CONF_dfs_namenode_name_dir=file:///hadoop/dfs/name
+      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+      - YARN_CONF_yarn_nodemanager_aux_services=mapreduce_shuffle
+      - YARN_CONF_yarn_resourcemanager_recovery_enabled=true
+      - YARN_CONF_yarn_resourcemanager_fs_state_store_uri=/tmp
+      - YARN_CONF_yarn_scheduler_capacity_root_queues=default
+      - YARN_CONF_yarn_scheduler_capacity_root_default_capacity=100
+      - MAPRED_CONF_mapreduce_framework_name=yarn
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9870 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./data:/hadoop/dfs
+    ports:
+      - "9870:9870"  # HDFS Web UI
+      - "9000:9000"  # NameNode
+      - "8088:8088"  # ResourceManager Web UI
+      - "8042:8042"  # NodeManager Web UI
+      - "19888:19888"  # JobHistoryServer UI
+    networks:
+      - hadoop
+
+  postgres:
+    image: postgres:10
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=metastore
+      - POSTGRES_USER=hive
+      - POSTGRES_PASSWORD=hivepassword
+    networks:
+      - hadoop
+    ports:
+      - "5436:5432"
+  
+  hive-metastore:
+    image: apache/hive:4.0.0-alpha-2
+    container_name: hive-metastore
+    environment:
+      - SERVICE=hive-metastore
+      - HIVE_METASTORE_USER=hive
+      - HIVE_METASTORE_PASSWORD=hivepassword
+      - HIVE_METASTORE_JDBC_URL=jdbc:postgresql://postgres:5432/metastore
+      - HIVE_CONF_METASTORE_URI=thrift://hive-metastore:9083
+      - HADOOP_HOME=/opt/hadoop
+    networks:
+      - hadoop
+    depends_on:
+      - postgres
+      - hadoop
+    ports:
+      - "9083:9083"  # Hive Metastore port
+
+  hive-server:
+    image: apache/hive:4.0.0-alpha-2
+    container_name: hive-server
+    environment:
+      - SERVICE=hive-server
+      - HIVE_SERVER2_THRIFT_BIND_HOST=0.0.0.0
+      - HIVE_SERVER2_THRIFT_PORT=10000
+      - HIVE_CONF_METASTORE_URI=thrift://hive-metastore:9083
+      - HADOOP_HOME=/opt/hadoop
+    networks:
+      - hadoop
+    depends_on:
+      - hive-metastore
+    ports:
+      - "10000:10000"  # HiveServer2 port for Thrift clients (e.g., Dremio)
+
+  dremio:
+    image: dremio/dremio-oss:24.1
+    container_name: dremio
+    environment:
+      - DREMIO_JAVA_SERVER_EXTRA_OPTS=-Dpaths.dist=file:///opt/dremio/data/dist
+    ports:
+      - "9047:9047"  # Dremio web UI
+      - "31010:31010" # Dremio JDBC Port
+      - "32010:32010" # Dremio Arrow Flight port (optional)
+      - "45678:45678" # Dremio internal ports
+    networks:
+      - hadoop
+
+networks:
+  hadoop:
+    driver: bridge
