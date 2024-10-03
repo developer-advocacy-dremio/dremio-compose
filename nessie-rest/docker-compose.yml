@@ -1,0 +1,95 @@
+version: '3'
+
+services:
+  nessie:
+    image: ghcr.io/projectnessie/nessie:0.99.0
+    container_name: nessie
+    ports:
+      - "19120:19120"  # Nessie API port
+    environment:
+      # Version store settings, using in-memory store
+      - nessie.version.store.type=IN_MEMORY
+      
+      # Catalog configuration for Iceberg REST
+      - nessie.catalog.default-warehouse=warehouse
+      - nessie.catalog.warehouses.warehouse.location=s3://my-bucket/  # Use a simple S3-like bucket (can be MinIO)
+      - nessie.catalog.service.s3.default-options.endpoint=http://minio:9000/
+      - nessie.catalog.service.s3.default-options.path-style-access=true
+      # Correct MinIO credentials for Nessie to use
+      - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
+      - nessie.catalog.secrets.access-key.name=admin
+      - nessie.catalog.secrets.access-key.secret=password
+      - nessie.catalog.service.s3.default-options.region=us-east-1  # Explicitly set region
+
+      
+      # No authentication (disabled)
+      - nessie.server.authentication.enabled=false
+
+    networks:
+      nessie-rest:
+
+  # MinIO (optional) for object storage
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"  # API port
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_REGION=us-east-1  # Set the region
+    entrypoint: >
+      /bin/sh -c "
+      minio server /data --console-address ':9001' &
+      sleep 5;
+      mc alias set myminio http://localhost:9000 admin password;
+      mc mb myminio/my-bucket --ignore-existing;
+      tail -f /dev/null"
+    healthcheck:
+      test: "curl --silent --fail http://localhost:9000/minio/health/live || exit 1"
+      interval: 5s
+      timeout: 2s
+      retries: 12
+    networks:
+      nessie-rest:
+
+  # Spark
+  spark:
+    platform: linux/x86_64
+    image: alexmerced/spark35nb:latest
+    ports: 
+      - 8080:8080    # Master Web UI
+      - 7077:7077    # Master Port for job submissions
+      - 8081:8081    # Worker Web UI
+      - 4040-4045:4040-4045  # Additional Spark job UI ports for more jobs
+      - 18080:18080  # Spark History Server
+      - 8888:8888    # Jupyter Notebook
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=admin  # Minio username
+      - AWS_SECRET_ACCESS_KEY=password  # Minio password
+      - SPARK_MASTER_HOST=spark
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_WORKER_WEBUI_PORT=8081
+      - SPARK_HISTORY_OPTS=-Dspark.history.fs.logDirectory=/tmp/spark-events
+      - SPARK_HOME=/opt/spark  # Set SPARK_HOME explicitly
+    volumes:
+      - ./notebook-seed:/workspace/seed-data  # Volume for seeding data into the container
+    container_name: spark
+    entrypoint: >
+      /bin/bash -c "
+      /opt/spark/sbin/start-master.sh && \
+      /opt/spark/sbin/start-worker.sh spark://$(hostname):7077 && \
+      mkdir -p /tmp/spark-events && \
+      start-history-server.sh && \
+      jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password='' && \
+      tail -f /dev/null
+      "
+    networks:
+      nessie-rest:
+
+
+networks:
+  nessie-rest:
